@@ -125,12 +125,12 @@ Follows some common examples of mapping correspondence between the HTTP method, 
 **Bean** is an object that is instantiated and managed from creation to destruction by the **Spring IoC Container**.
 
 **Spring Bean Scope** Reference: https://www.baeldung.com/spring-bean-scopes. Last four scopes mentioned, request, session, application and websocket, are only available in a web-aware application.
-- singleton
-- prototype
-- request
-- session
-- application
-- websocket
+- singleton - one instance as reference, cache
+- prototype - different versions of instance, created on demand
+- request - instance for http request
+- session - instance for http session
+- application - instance for life cycle of servlet context
+- websocket - creates particular for websocket sessions
 
 **Spring IoC Container** is responsible for instantiating beans, wiring dependencies and managing the bean lifecycle from its instantiation till destruction. Spring have two IoC container implementations: [BeanFactory](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html) and [ApplicationContext](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationContext.html).
 
