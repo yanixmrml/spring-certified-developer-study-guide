@@ -311,6 +311,19 @@ By default, Spring Boot will find and load `application.[properties|yml]` files 
 
 With that in mind, if a property is defined in `/resources/application.properties` and there is a definition for the same property in `/resources/config/application.properties` with a different value, the value from the latter location will take precedence over the former.
 
+Spring Boot uses a very particular `PropertySource` order that is designed to allow sensible overriding of values, properties are considered in the the following order:
+1. Command line arguments.
+2. JNDI attributes from `java:comp/env`.
+3. Java System properties (`System.getProperties()`).
+4. OS environment variables.
+5. A `RandomValuePropertySource` that only has properties in `random.*`.
+6. [Profile-specific application properties](https://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties) outside of your packaged jar (`application-{profile}.properties` and YAML variants)
+7. [Profile-specific application properties](https://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties) packaged inside your jar (`application-{profile}.properties` and YAML variants)
+8. Application properties outside of your packaged jar (`application.properties` and YAML variants).
+9. Application properties packaged inside your jar (`application.properties` and YAML variants).
+10. `@PropertySource` annotations on your `@Configuration` classes.
+11. Default properties (specified using `SpringApplication.setDefaultProperties`).
+    
 </br>
 
 ## KEY ANNOTATIONS
